@@ -1,0 +1,33 @@
+services:
+  m-termius:
+    image: m-termius:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: m-termius
+    ports:
+      - "2208:2208"
+    volumes:
+      # Persist user data across restarts
+      - mtermius_data:/home/node/.m-termius
+      # Optional: bind mount for file access
+      # - /:/host:ro
+    environment:
+      - NODE_ENV=production
+      - PORT=2208
+      - HOST=0.0.0.0
+      # Root directory for file explorer (within container)
+      - ROOT_DIR=/home/node
+      # Disable auth in Docker by default (use reverse proxy for auth)
+      - MTERMIUS_NO_AUTH=true
+    restart: unless-stopped
+    networks:
+      - mtermius
+
+volumes:
+  mtermius_data:
+    driver: local
+
+networks:
+  mtermius:
+    driver: bridge

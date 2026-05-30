@@ -1,0 +1,14 @@
+node_modules/
+ui-dist/
+*.log
+.env
+.DS_Store
+.vite/
+dist/
+.cache/
+src-tauri/target/
+src-tauri/gen/
+vendor-9remote-dist/
+Resources/
+*.md
+!README.md
