@@ -10,21 +10,8 @@ services:
       - NODE_ENV=production
       - PORT=2208
       - HOST=0.0.0.0
-      # Bỏ dòng dưới nếu muốn bật xác thực pairing
-      - MTERMIUS_NO_AUTH=true
+      # KHÔNG set MTERMIUS_NO_AUTH = auth bật, cần quét QR để vào
     restart: unless-stopped
-    # Giới hạn tài nguyên
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-          cpus: "1"
-    # Bảo mật: no-new-privileges, read-only root fs (trừ volume data)
-    security_opt:
-      - no-new-privileges:true
-    read_only: true
-    tmpfs:
-      - /tmp:exec,size=64M
 
 volumes:
   mremote_data:
