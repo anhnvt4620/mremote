@@ -8,17 +8,13 @@ node_modules/
 .claude/
 sidecar-stdout.txt
 
-# Local dev only - not in repo
-src/
-ui-dist/
-scripts/
-vendor-9remote-dist/
+# Dev source (không cần cho Docker build)
+src/ui/src/
 src-tauri/
+vendor-9remote-dist/
 Resources/
 vite.config.js
+scripts/
 package.json.orig
-package-lock.json
 README.orig.md
-Dockerfile
-.dockerignore
-.github/
+package-lock.json.orig

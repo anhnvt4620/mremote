@@ -1,0 +1,84 @@
+{
+  "name": "mremote",
+  "version": "0.5.0",
+  "description": "MRemote — remote terminal, desktop streaming, file explorer, and system management in your pocket",
+  "type": "module",
+  "main": "src/server/index.js",
+  "bin": {
+    "mremote": "./src/cli/index.js"
+  },
+  "scripts": {
+    "start": "node src/cli/index.js",
+    "ui": "node src/cli/index.js ui",
+    "dev": "node src/cli/index.js ui",
+    "dev:ui": "vite",
+    "build:ui": "vite build",
+    "preview:ui": "vite preview",
+    "build:sidecar": "node scripts/build-sidecar.mjs",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "npm run build:ui && npm run build:sidecar && tauri build"
+  },
+  "files": [
+    "src/",
+    "ui-dist/"
+  ],
+  "keywords": [
+    "remote",
+    "terminal",
+    "ssh",
+    "cli",
+    "termius",
+    "m-termius",
+    "pty",
+    "websocket",
+    "file-explorer"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "chokidar": "^4.0.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mime-types": "^2.1.35",
+    "multer": "^1.4.5-lts.1",
+    "node-machine-id": "^1.1.12",
+    "node-pty": "^1.1.0",
+    "ora": "^8.2.0",
+    "qrcode-terminal": "^0.12.0",
+    "screenshot-desktop": "^1.15.4",
+    "socket.io": "^4.8.1",
+    "ssh2": "^1.17.0"
+  },
+  "devDependencies": {
+    "@codemirror/commands": "^6.10.3",
+    "@codemirror/lang-cpp": "^6.0.3",
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/lang-go": "^6.0.1",
+    "@codemirror/lang-html": "^6.4.11",
+    "@codemirror/lang-javascript": "^6.2.5",
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/lang-markdown": "^6.5.0",
+    "@codemirror/lang-python": "^6.2.1",
+    "@codemirror/lang-rust": "^6.0.2",
+    "@codemirror/lang-sql": "^6.10.0",
+    "@codemirror/lang-yaml": "^6.1.3",
+    "@codemirror/language": "^6.12.3",
+    "@codemirror/state": "^6.6.0",
+    "@codemirror/view": "^6.43.0",
+    "@preact/preset-vite": "^2.10.1",
+    "@tauri-apps/cli": "^2.11.2",
+    "@uiw/codemirror-theme-github": "^4.25.10",
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/addon-web-links": "^0.11.0",
+    "@xterm/xterm": "^5.5.0",
+    "codemirror": "^6.0.2",
+    "esbuild": "^0.28.0",
+    "preact": "^10.25.4",
+    "socket.io-client": "^4.8.3",
+    "vite": "^6.0.7"
+  }
+}
