@@ -8,13 +8,17 @@ node_modules/
 .claude/
 sidecar-stdout.txt
 
-# Dev-only (not deployed)
-src/ui/src/
-vite.config.js
-src-tauri/
+# Local dev only - not in repo
+src/
+ui-dist/
+scripts/
 vendor-9remote-dist/
+src-tauri/
 Resources/
-.vite/
-dist/
+vite.config.js
 package.json.orig
+package-lock.json
 README.orig.md
+Dockerfile
+.dockerignore
+.github/
