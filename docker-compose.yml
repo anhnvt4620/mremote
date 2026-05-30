@@ -3,8 +3,6 @@ services:
     image: ghcr.io/anhnvt4620/mremote:latest
     container_name: mremote
     restart: unless-stopped
-    pid: "host"
-    privileged: true
     environment:
       - NODE_ENV=production
       - PORT=2208
@@ -18,6 +16,7 @@ services:
     volumes:
       - mremote_data:/home/app/.mtermius
       - /home/snow:/home/snow
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - n8n_network
 
