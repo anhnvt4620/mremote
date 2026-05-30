@@ -8,6 +8,8 @@ services:
       - PORT=2208
       - HOST=0.0.0.0
       - HOME=/home/app
+      - LANG=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
     command: ["node", "src/cli/index.js", "--no-tunnel"]
     volumes:
       - mremote_data:/home/app/.mtermius
