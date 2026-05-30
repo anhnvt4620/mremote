@@ -1,19 +1,20 @@
 node_modules/
-ui-dist/
 *.log
 .env
 .DS_Store
-.vite/
-dist/
 .cache/
 .codebuddy/
 .opencode/
+.claude/
 sidecar-stdout.txt
 
-# Tauri build
-src-tauri/target/
-src-tauri/gen/
-src-tauri/sidecar/
-
-# Vendor reference
+# Dev-only (not deployed)
+src/ui/src/
+vite.config.js
+src-tauri/
 vendor-9remote-dist/
+Resources/
+.vite/
+dist/
+package.json.orig
+README.orig.md
