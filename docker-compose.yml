@@ -2,8 +2,8 @@ services:
   mremote:
     image: ghcr.io/anhnvt4620/mremote:latest
     container_name: mremote
-    ports:
-      - "2208:2208"
+    expose:
+      - "2208"
     volumes:
       - mremote_data:/home/app/.mtermius
     environment:
@@ -12,7 +12,13 @@ services:
       - HOST=0.0.0.0
     command: ["node", "src/cli/index.js", "--no-tunnel"]
     restart: unless-stopped
+    networks:
+      - caddy_net
 
 volumes:
   mremote_data:
     driver: local
+
+networks:
+  caddy_net:
+    external: true
