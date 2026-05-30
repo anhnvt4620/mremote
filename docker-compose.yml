@@ -4,8 +4,7 @@ services:
     container_name: mremote
     restart: unless-stopped
     user: "1000:1000"
-    cap_add:
-      - SYS_CHROOT
+    pid: "host"
     environment:
       - NODE_ENV=production
       - PORT=2208
@@ -19,7 +18,7 @@ services:
     volumes:
       - /home/snow/tnhi/.m-termius:/home/snow/tnhi/.m-termius
       - /home/snow:/home/snow
-      - /:/host
+      - /usr/bin/nsenter:/hostbin/nsenter:ro
     networks:
       - n8n_network
 
