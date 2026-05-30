@@ -10,7 +10,7 @@ services:
       - NODE_ENV=production
       - PORT=2208
       - HOST=0.0.0.0
-      # KHÔNG set MTERMIUS_NO_AUTH = auth bật, cần quét QR để vào
+    command: ["node", "src/cli/index.js", "--no-tunnel"]
     restart: unless-stopped
 
 volumes:
