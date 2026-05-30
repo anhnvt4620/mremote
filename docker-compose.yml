@@ -16,12 +16,14 @@ services:
     volumes:
       - mremote_data:/home/app/.mtermius
       - /home/snow:/home/snow
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ssh_key:/home/app/.ssh
     networks:
       - n8n_network
 
 volumes:
   mremote_data:
+    driver: local
+  ssh_key:
     driver: local
 
 networks:
