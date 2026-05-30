@@ -10,14 +10,15 @@ services:
       - NODE_ENV=production
       - PORT=2208
       - HOST=0.0.0.0
-      - HOME=/home/app
+      - HOME=/home/snow/tnhi
       - HOST_USER=snow
-      - ROOT_DIR=/host/home/snow
+      - ROOT_DIR=/home/snow
       - MTERMIUS_SHELL=/home/app/host-shell
       - LANG=en_US.UTF-8
       - LC_ALL=en_US.UTF-8
     volumes:
-      - mremote_data:/home/app/.mtermius
+      - /home/snow/tnhi/.m-termius:/home/snow/tnhi/.m-termius
+      - /home/snow:/home/snow
       - /:/host
     networks:
       - n8n_network
