@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Create host-shell via nsenter (requires --pid=host in docker-compose)
+# Create host-shell via nsenter (requires --pid=host + privileged in docker-compose)
 if [ -x /usr/bin/nsenter ]; then
   cat > /home/app/host-shell << 'WRAPPER'
 #!/bin/bash
