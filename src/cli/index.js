@@ -20,7 +20,7 @@ function banner() {
   const lines = [
     chalk.hex('#e68a6e')('╔══════════════════════════════════════════╗'),
     chalk.hex('#e68a6e')('║') + '                                          ' + chalk.hex('#e68a6e')('║'),
-    chalk.hex('#e68a6e')('║') + chalk.bold.hex('#e68a6e')(`          🚀  M-Termius v${VERSION}            `) + chalk.hex('#e68a6e')('║'),
+    chalk.hex('#e68a6e')('║') + chalk.bold.hex('#e68a6e')(`          🚀  MRemote v${VERSION}              `) + chalk.hex('#e68a6e')('║'),
     chalk.hex('#e68a6e')('║') + chalk.dim('   Remote terminal in your pocket         ') + chalk.hex('#e68a6e')('║'),
     chalk.hex('#e68a6e')('║') + '                                          ' + chalk.hex('#e68a6e')('║'),
     chalk.hex('#e68a6e')('╚══════════════════════════════════════════╝'),
