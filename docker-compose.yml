@@ -7,6 +7,7 @@ services:
       - NODE_ENV=production
       - PORT=2208
       - HOST=0.0.0.0
+      - HOME=/home/app
     command: ["node", "src/cli/index.js", "--no-tunnel"]
     volumes:
       - mremote_data:/home/app/.mtermius

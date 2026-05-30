@@ -21,13 +21,13 @@ COPY package.json ./
 COPY src/ ./src/
 COPY ui-dist/ ./ui-dist/
 
-# Create non-root user
-RUN addgroup --system --gid 1001 app && adduser --system --uid 1001 --gid 1001 app \
+# Create non-root user with real home dir
+RUN addgroup --system --gid 1001 app && adduser --system --uid 1001 --gid 1001 --home /home/app app \
   && mkdir -p /home/app/.mtermius && chown -R app:app /app /home/app
 
 USER app
 
-ENV NODE_ENV=production HOST=0.0.0.0 PORT=2208
+ENV HOME=/home/app NODE_ENV=production HOST=0.0.0.0 PORT=2208
 EXPOSE 2208
 
 HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
