@@ -3,16 +3,22 @@ services:
     image: ghcr.io/anhnvt4620/mremote:latest
     container_name: mremote
     restart: unless-stopped
+    user: "1000:1000"
+    cap_add:
+      - SYS_CHROOT
     environment:
       - NODE_ENV=production
       - PORT=2208
       - HOST=0.0.0.0
       - HOME=/home/app
+      - HOST_USER=snow
+      - ROOT_DIR=/host/home/snow
+      - MTERMIUS_SHELL=/home/app/host-shell
       - LANG=en_US.UTF-8
       - LC_ALL=en_US.UTF-8
-    command: ["node", "src/cli/index.js", "--no-tunnel"]
     volumes:
       - mremote_data:/home/app/.mtermius
+      - /:/host
     networks:
       - n8n_network
 
