@@ -1,33 +1,31 @@
 services:
-  m-termius:
-    image: m-termius:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: m-termius
+  mremote:
+    image: ghcr.io/anhnvt4620/mremote:latest
+    container_name: mremote
     ports:
       - "2208:2208"
     volumes:
-      # Persist user data across restarts
-      - mtermius_data:/home/node/.m-termius
-      # Optional: bind mount for file access
-      # - /:/host:ro
+      - mremote_data:/home/app/.mtermius
     environment:
       - NODE_ENV=production
       - PORT=2208
       - HOST=0.0.0.0
-      # Root directory for file explorer (within container)
-      - ROOT_DIR=/home/node
-      # Disable auth in Docker by default (use reverse proxy for auth)
+      # Bỏ dòng dưới nếu muốn bật xác thực pairing
       - MTERMIUS_NO_AUTH=true
     restart: unless-stopped
-    networks:
-      - mtermius
+    # Giới hạn tài nguyên
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1"
+    # Bảo mật: no-new-privileges, read-only root fs (trừ volume data)
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:exec,size=64M
 
 volumes:
-  mtermius_data:
+  mremote_data:
     driver: local
-
-networks:
-  mtermius:
-    driver: bridge
