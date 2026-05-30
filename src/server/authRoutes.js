@@ -23,7 +23,7 @@ export function registerAuthRoutes(app, { auth }) {
   app.post('/api/auth/pair', (req, res) => {
     const { code, label } = req.body || {};
     const result = auth.consumePairing(code, label);
-    if (!result) return res.status(401).json({ error: 'invalid or expired code' });
+    if (!result) return res.status(400).json({ error: 'invalid or expired code' });
     res.json(result);
   });
 
