@@ -1,5 +1,4 @@
 node_modules/
-ui-dist/
 *.log
 .env
 .DS_Store
@@ -12,3 +11,5 @@ vendor-9remote-dist/
 Resources/
 *.md
 !README.md
+.git/
+.github/
