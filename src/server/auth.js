@@ -91,7 +91,10 @@ export function createAuth({ enabled = true } = {}) {
       req.path === '/api/health' ||
       req.path.startsWith('/api/auth/') ||
       req.path === '/pair' ||
-      req.path === '/'
+      req.path === '/' ||
+      req.path.startsWith('/assets/') ||
+      req.path.endsWith('.svg') ||
+      req.path.endsWith('.ico')
     ) return next();
     const token = extractToken(req);
     if (tokenValid(token)) return next();
