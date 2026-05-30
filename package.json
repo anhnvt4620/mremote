@@ -1,12 +1,11 @@
 {
-  "name": "m-termius",
-  "version": "0.1.0",
-  "description": "M-Termius — remote terminal, file explorer, editor, and remote desktop in your pocket",
+  "name": "mremote",
+  "version": "0.5.0",
+  "description": "MRemote — remote terminal, desktop streaming, file explorer, and system management in your pocket",
   "type": "module",
   "main": "src/server/index.js",
   "bin": {
-    "m-termius": "./src/cli/index.js",
-    "mtermius": "./src/cli/index.js"
+    "mremote": "./src/cli/index.js"
   },
   "scripts": {
     "start": "node src/cli/index.js",
