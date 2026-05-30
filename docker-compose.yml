@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     user: "1000:1000"
     pid: "host"
+    privileged: true
     environment:
       - NODE_ENV=production
       - PORT=2208
