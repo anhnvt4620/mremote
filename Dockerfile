@@ -10,9 +10,9 @@ RUN npm ci --omit=dev && npm cache clean --force
 FROM node:20-slim
 WORKDIR /app
 
-# Runtime deps + locale UTF-8 + nsenter (host access)
+# Runtime deps + locale UTF-8 + docker CLI (host access via docker sock)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    bash openssh-client locales util-linux \
+    bash openssh-client locales docker.io \
   && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen en_US.UTF-8 \
   && rm -rf /var/lib/apt/lists/*
 
