@@ -87,7 +87,12 @@ export function createAuth({ enabled = true } = {}) {
 
   function httpMiddleware(req, res, next) {
     if (!enabled) return next();
-    if (req.path === '/api/health' || req.path.startsWith('/api/auth/')) return next();
+    if (
+      req.path === '/api/health' ||
+      req.path.startsWith('/api/auth/') ||
+      req.path === '/pair' ||
+      req.path === '/'
+    ) return next();
     const token = extractToken(req);
     if (tokenValid(token)) return next();
     res.status(401).json({ error: 'unauthorized' });
