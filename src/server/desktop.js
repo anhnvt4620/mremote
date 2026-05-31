@@ -10,10 +10,16 @@ const isLinux = process.platform === 'linux';
 
 let screenshotLib = null;
 async function getScreenshot() {
-  if (!screenshotLib) {
-    screenshotLib = (await import('screenshot-desktop')).default;
+  try {
+    if (!screenshotLib) {
+      screenshotLib = (await import('screenshot-desktop')).default;
+    }
+    // Skip if no display available (headless server)
+    if (!process.env.DISPLAY && !process.env.WAYLAND_DISPLAY) return null;
+    return await screenshotLib({ format: 'png' });
+  } catch {
+    return null;
   }
-  return screenshotLib({ format: 'png' });
 }
 
 // ---- Mouse/Keyboard Injection (cross-platform) ----
@@ -143,20 +149,23 @@ function escapeForSendKeys(key) {
 
 async function getScreenInfo() {
   try {
-    const shot = await getScreenshot();
-    // Check if we can get resolution
-    const { screen } = await import('screenshot-desktop');
-    const displays = await screen.listDisplays();
-    if (displays && displays.length > 0) {
-      const primary = displays.find((d) => d.primary) || displays[0];
-      return {
-        width: primary.width,
-        height: primary.height,
-        displays,
-      };
+    // Check if display is available before making calls
+    if (process.env.DISPLAY || process.env.WAYLAND_DISPLAY) {
+      const shot = await getScreenshot();
+      if (shot) {
+        const { screen } = await import('screenshot-desktop');
+        const displays = await screen.listDisplays();
+        if (displays && displays.length > 0) {
+          const primary = displays.find((d) => d.primary) || displays[0];
+          return { width: primary.width, height: primary.height, displays };
+        }
+      }
     }
-  } catch {}
-  return { width: 1920, height: 1080, displays: [] };
+  } catch (e) {
+    // Headless server - no display available
+    console.log('[desktop] Screen capture not available (headless server)');
+  }
+  return { width: 1920, height: 1080, displays: [], noDisplay: true };
 }
 
 // ---- Streaming handler ----
@@ -176,6 +185,12 @@ export function attachDesktop(io) {
 
       const info = await getScreenInfo();
       socket.emit('screen-info', info);
+
+      if (info.noDisplay) {
+        socket.emit('error', { message: 'No display available on this server (headless)' });
+        isStreaming = false;
+        return;
+      }
 
       // Adaptive frame rate based on quality
       const fpsMap = { high: 100, medium: 200, low: 500 };
