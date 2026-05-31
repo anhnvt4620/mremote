@@ -13,6 +13,11 @@ services:
       - MTERMIUS_SHELL=/home/app/host-shell
       - LANG=en_US.UTF-8
       - LC_ALL=en_US.UTF-8
+      # Notification services (optional — uncomment to use)
+      # - MREMOTE_TELEGRAM_BOT=123456:ABC-DEF1234gh
+      # - MREMOTE_TELEGRAM_CHAT=-1001234567890
+      # - MREMOTE_DISCORD_WEBHOOK=https://discord.com/api/webhooks/...
+      # - MREMOTE_NOTIFY_WEBHOOK=https://your-webhook.com/notify
     volumes:
       - mremote_data:/home/app/.mtermius
       - /home/snow:/home/snow

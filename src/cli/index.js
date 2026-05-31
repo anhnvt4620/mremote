@@ -6,6 +6,7 @@ import qrcodeTerminal from 'qrcode-terminal';
 import { startServer } from '../server/index.js';
 import { createAuth } from '../server/auth.js';
 import { startTunnel } from '../server/tunnel.js';
+import { notifyPairing } from '../server/notify.js';
 
 const __filename = typeof import.meta !== 'undefined' && import.meta.url
   ? fileURLToPath(import.meta.url)
@@ -108,6 +109,10 @@ async function main() {
 
   if (enableAuth) {
     showQR({ port: DEFAULT_PORT, pairing: auth.getPairing(), tunnel });
+    // Push code to configured notification services
+    const p = auth.getPairing();
+    const url = tunnel?.url || `http://localhost:${DEFAULT_PORT}`;
+    notifyPairing({ code: p.code, pairUrl: `${url}/pair?code=${p.code}`, localUrl: `http://localhost:${DEFAULT_PORT}`, tunnelUrl: tunnel?.url });
   } else {
     console.log(chalk.yellow('⚠'), `Auth disabled (--no-auth). API is open on this port.`);
     console.log();
